@@ -9,7 +9,7 @@ import cn.edu.bit.zzb.mpsoc.mapping.ICG;
 import cn.edu.bit.zzb.mpsoc.mapping.ICGNode;
 import cn.edu.bit.zzb.mpsoc.mapping.MainFrame;
 
-public class Individual implements Comparable<Individual> {
+public class NAGAIndividual implements Comparable<NAGAIndividual> {
 	public static final double PCROSSOVERMAX = 1;
 	public static final double PCROSSOVERMIN = 0.1;
 	public static final double PMUTATIONMAX = 0.2;
@@ -18,7 +18,7 @@ public class Individual implements Comparable<Individual> {
 	public  double pCrossover = 0.6;
 	public  double pMutation = 0.05;
 	
-	protected GA ga = null;
+	protected NAGA ga = null;
 		
 	private float fitness =0;
 	protected ArrayList<ICGNode> genetic = null ;
@@ -27,14 +27,14 @@ public class Individual implements Comparable<Individual> {
 		return genetic;
 	}
 
-	public Individual(GA ga) {
+	public NAGAIndividual(NAGA ga) {
 		genetic = new ArrayList<ICGNode>();
 		this.ga = ga;
 		initGenetic();
 		caculateFitness();
 	}
 	
-	public Individual(Individual id) {
+	public NAGAIndividual(NAGAIndividual id) {
 		this.ga = id.ga;
 		genetic = new ArrayList<ICGNode>();
 		genetic.addAll(id.genetic);
@@ -53,8 +53,8 @@ public class Individual implements Comparable<Individual> {
 		}
 	}
 	
-	public static Individual mutation(Individual source) {
-		Individual newIndividual = new Individual(source);
+	public static NAGAIndividual mutation(NAGAIndividual source) {
+		NAGAIndividual newIndividual = new NAGAIndividual(source);
 		newIndividual.caculateMutationP();
 	
 		for(int i=0;i<newIndividual.genetic.size();i++) {
@@ -76,11 +76,11 @@ public class Individual implements Comparable<Individual> {
 		}
 		newIndividual.caculateFitness();
 		if(source.getFitness() < newIndividual.getFitness()) return newIndividual;
-		else return new Individual(source);	
+		else return new NAGAIndividual(source);	
 	}
 	
 	
-	public static List<Individual> crossover(Individual[] hasMated) {
+	public static List<NAGAIndividual> crossover(NAGAIndividual[] hasMated) {
 		double pCrossoverT = 0;
 		
 		if(hasMated[0].fitness > hasMated[1].fitness) {
@@ -91,11 +91,11 @@ public class Individual implements Comparable<Individual> {
 			pCrossoverT = hasMated[1].pCrossover;
 		}
 		
-		List<Individual> result = new ArrayList<Individual>(2);
+		List<NAGAIndividual> result = new ArrayList<NAGAIndividual>(2);
 		if(Math.random() < pCrossoverT) {
-			Individual[] newIndividual = new Individual[2];
-			newIndividual[0] = new Individual(hasMated[0]);
-			newIndividual[1] = new Individual(hasMated[1]);
+			NAGAIndividual[] newIndividual = new NAGAIndividual[2];
+			newIndividual[0] = new NAGAIndividual(hasMated[0]);
+			newIndividual[1] = new NAGAIndividual(hasMated[1]);
 			
 			int position = (int)(Math.random() * hasMated[0].genetic.size());
 			
@@ -115,7 +115,7 @@ public class Individual implements Comparable<Individual> {
 			newIndividual[0].caculateFitness();
 			newIndividual[1].caculateFitness();
 			//¸¸×Ó´ú¾ºÕù
-			Individual[] newRange = new Individual[4];
+			NAGAIndividual[] newRange = new NAGAIndividual[4];
 			newRange[0] = hasMated[0];
 			newRange[1] = hasMated[1];
 			newRange[2] = newIndividual[0];
@@ -171,7 +171,7 @@ public class Individual implements Comparable<Individual> {
 		return fitness;
 	}
 	
-	public int compareTo(Individual id) {
+	public int compareTo(NAGAIndividual id) {
 		if(this.fitness > id.fitness) {
 			return 1;
 		} else if(this.fitness < id.fitness) {

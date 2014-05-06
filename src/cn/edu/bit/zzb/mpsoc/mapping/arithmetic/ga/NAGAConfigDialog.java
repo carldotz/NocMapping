@@ -24,7 +24,7 @@ import javax.swing.border.EmptyBorder;
 import cn.edu.bit.zzb.mpsoc.mapping.ConfigDialog;
 import cn.edu.bit.zzb.mpsoc.mapping.MainFrame;
 
-public class GAConfigDialog extends ConfigDialog {
+public class NAGAConfigDialog extends ConfigDialog {
 	
 	private static final long serialVersionUID = -7414648667840261560L;
 	
@@ -37,7 +37,7 @@ public class GAConfigDialog extends ConfigDialog {
 	private JTextField gNMaxJ = new JTextField();
 	private JTextField gNNMinJ = new JTextField();
 	
-	public GAConfigDialog() {
+	public NAGAConfigDialog() {
 		super("GA Mapping");
 				
 		JPanel panel = new JPanel(new GridLayout(6, 2, 2, 2));
@@ -78,11 +78,11 @@ public class GAConfigDialog extends ConfigDialog {
 					JOptionPane.showMessageDialog(null, "Please Create a ACG and a ICG first!", "Error", JOptionPane.ERROR_MESSAGE);
 				} else if(MainFrame.aCG.size() > MainFrame.iCG.size()) {
 					JOptionPane.showMessageDialog(null, "The size of ACG must smaller than the size of ICG", "Error", JOptionPane.ERROR_MESSAGE);
-				} else if(GA.Running) {
+				} else if(NAGA.Running) {
 					JOptionPane.showMessageDialog(null, "Please Teminate the old GA!", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					updateProperties();
-					Thread t = new Thread(new GA(individualNumber, gNMax, gNNMin, gNIMin));
+					Thread t = new Thread(new NAGA(individualNumber, gNMax, gNNMin, gNIMin));
 					t.start();
 				}
 				setVisible(false);

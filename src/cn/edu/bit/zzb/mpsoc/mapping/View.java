@@ -10,7 +10,7 @@ import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import cn.edu.bit.zzb.mpsoc.mapping.arithmetic.ga.GAConfigDialog;
+import cn.edu.bit.zzb.mpsoc.mapping.arithmetic.ga.NAGAConfigDialog;
 
 import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
@@ -28,7 +28,7 @@ public class View extends JPanel {
 
 	ICGConfigDialog iCGConfigDialog = null;
 	ACGConfigDialog aCGConfigDialog = null;
-	GAConfigDialog gAConfigDialog = null;
+	NAGAConfigDialog gAConfigDialog = null;
 
 	public View(MainFrame mf) {
 
@@ -134,7 +134,7 @@ public class View extends JPanel {
 
 	public void creatGA() {
 		if (gAConfigDialog == null)
-			gAConfigDialog = new GAConfigDialog();
+			gAConfigDialog = new NAGAConfigDialog();
 		this.gAConfigDialog.launch();
 	}
 

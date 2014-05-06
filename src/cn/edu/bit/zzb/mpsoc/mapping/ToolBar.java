@@ -5,7 +5,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import cn.edu.bit.zzb.mpsoc.mapping.arithmetic.ga.GA;
+import cn.edu.bit.zzb.mpsoc.mapping.arithmetic.ga.NAGA;
 
 import java.net.URL;
 import java.awt.BorderLayout;
@@ -108,7 +108,7 @@ public class ToolBar extends JPanel implements ActionListener {
 			}
 		} else if ("GA Mapping".equals(cmd)) {
 			mf.getView().creatGA();
-			if(GA.Running) {
+			if(NAGA.Running) {
 				this.buttonACG.setEnabled(false);
 				this.buttonICG.setEnabled(false);
 				this.buttonMap.setEnabled(false);
@@ -119,11 +119,11 @@ public class ToolBar extends JPanel implements ActionListener {
 				this.buttonPlay.setEnabled(false);
 			}
 		} else if ("Faster".equals(cmd)) {
-			GA.faster();
+			NAGA.faster();
 		} else if ("Slower".equals(cmd)) {
-			GA.slower();
+			NAGA.slower();
 		}  else if ("Terminate".equals(cmd)) {
-			GA.end();
+			NAGA.end();
 			this.buttonACG.setEnabled(true);
 			this.buttonICG.setEnabled(true);
 			this.buttonFaster.setEnabled(false);
@@ -133,13 +133,13 @@ public class ToolBar extends JPanel implements ActionListener {
 			this.buttonPlay.setEnabled(false);
 			this.buttonMap.setEnabled(true);
 		} else if("Suspend".equals(cmd)) {
-			GA.suspend();
+			NAGA.suspend();
 			this.buttonFaster.setEnabled(false);
 			this.buttonSlower.setEnabled(false);
 			this.buttonPlay.setEnabled(true);
 			this.buttonSuspend.setEnabled(false);
 		} else if("Play".equals(cmd)) {
-			GA.play();
+			NAGA.play();
 			this.buttonFaster.setEnabled(true);
 			this.buttonSlower.setEnabled(true);
 			this.buttonSuspend.setEnabled(true);

@@ -11,7 +11,7 @@ import cn.edu.bit.zzb.mpsoc.mapping.MainFrame;
 import cn.edu.bit.zzb.mpsoc.mapping.MappingArithmetic;
 
 @SuppressWarnings("serial")
-public class GA extends ArrayList<Individual> implements MappingArithmetic {
+public class NAGA extends ArrayList<NAGAIndividual> implements MappingArithmetic {
 
 	public static boolean Running = false;
 	public static int sleepTime = 1000;
@@ -38,25 +38,25 @@ public class GA extends ArrayList<Individual> implements MappingArithmetic {
 		suspend = false;
 	}
 
-	public GA(int indiviadualNumber, int gNMax, int gNNMin, float gNIMin) {
+	public NAGA(int indiviadualNumber, int gNMax, int gNNMin, float gNIMin) {
 		this.gNMax = gNMax;
 		this.gNNMin = gNNMin;
 		this.gNIMin = gNIMin;
 
 		int i;
 		for (i = 0; i < indiviadualNumber; i++) {
-			this.add(new Individual(this));
+			this.add(new NAGAIndividual(this));
 		}
 	}
 
-	protected Individual rouletteWheelSelection(List<Individual> c) {
+	protected NAGAIndividual rouletteWheelSelection(List<NAGAIndividual> c) {
 		double sum = 0;
-		for (Individual id : c) {
+		for (NAGAIndividual id : c) {
 			sum += id.getFitness();
 		}
 		double randomNumber = Math.random() * sum;
 		sum = 0;
-		for (Individual id : c) {
+		for (NAGAIndividual id : c) {
 			sum += id.getFitness();
 			if (sum > randomNumber) {
 				return id;
@@ -75,29 +75,29 @@ public class GA extends ArrayList<Individual> implements MappingArithmetic {
 		bestFitness = Collections.max(this).getFitness();
 		while (!shouldBeEnd()) {
 			// Ñ¡Ôñ
-			List<Individual> hasSelected = new LinkedList<Individual>();
+			List<NAGAIndividual> hasSelected = new LinkedList<NAGAIndividual>();
 			while (hasSelected.size() < this.size()) {
 				hasSelected.add(rouletteWheelSelection(this));
 			}
 
 			// ½»²æ
-			Individual[][] hasMated = new Individual[this.size() / 2][2];
-			List<Individual> newGenetic = new ArrayList<Individual>();
+			NAGAIndividual[][] hasMated = new NAGAIndividual[this.size() / 2][2];
+			List<NAGAIndividual> newGenetic = new ArrayList<NAGAIndividual>();
 			for (int i = 0; i < hasMated.length; i++) {
 				for (int j = 0; j < 2; j++) {
 					hasMated[i][j] = hasSelected
 							.get((int) (Math.random() * hasSelected.size()));
 				}
-				newGenetic.addAll(Individual.crossover(hasMated[i]));
+				newGenetic.addAll(NAGAIndividual.crossover(hasMated[i]));
 			}
 			this.clear();
 			// ±äÒì
 			for (int i = 0; i < newGenetic.size(); i++) {
-				this.add(Individual.mutation(newGenetic.get(i)));
+				this.add(NAGAIndividual.mutation(newGenetic.get(i)));
 			}
 
 			double sumFitness = 0;
-			for (Individual id : this) {
+			for (NAGAIndividual id : this) {
 				sumFitness += id.getFitness();
 			}
 			averageFitness = (float) (sumFitness / this.size());

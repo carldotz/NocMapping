@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import cn.edu.bit.zzb.mpsoc.mapping.arithmetic.ga.GA;
+import cn.edu.bit.zzb.mpsoc.mapping.arithmetic.ga.NAGA;
 
 import com.mxgraph.analysis.mxAnalysisGraph;
 import com.mxgraph.analysis.mxGraphGenerator;
@@ -75,7 +75,7 @@ public class ICGConfigDialog extends ConfigDialog {
 
 		applyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(GA.Running) {
+				if(NAGA.Running) {
 					JOptionPane.showMessageDialog(null, "You should terminate GA first!", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					int yDim = Integer.parseInt(numRowsField.getText());
