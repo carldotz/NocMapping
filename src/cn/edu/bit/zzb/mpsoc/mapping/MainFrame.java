@@ -74,7 +74,7 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menuBar = new MenuBar(this);
 		setJMenuBar(new MenuBar(this));
-		setSize(1024, 768);
+		setSize(800, 600);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = getSize();
 		setLocation(screenSize.width / 2 - (frameSize.width / 2),

@@ -38,7 +38,7 @@ public class NAGAConfigDialog extends ConfigDialog {
 	public NAGAConfigDialog() {
 		super("NAGA Mapping");
 				
-		JPanel panel = new JPanel(new GridLayout(6, 2, 2, 2));
+		JPanel panel = new JPanel(new GridLayout(4, 2, 2, 2));
 		JLabel jlabel = null;
 		jlabel =  new JLabel("Individual Num");
 		jlabel.setToolTipText("The number of Individual");

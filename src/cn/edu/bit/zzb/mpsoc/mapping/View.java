@@ -51,7 +51,7 @@ public class View extends JPanel {
 		JSplitPane graphView = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 				graphComponentACG, graphComponentICG);
 		graphView.setOneTouchExpandable(true);
-		graphView.setDividerLocation(515);
+		graphView.setDividerLocation(394);
 		graphView.setDividerSize(12);
 		graphView.setBorder(null);
 
