@@ -74,7 +74,6 @@ public class NAGA extends ArrayList<NAGAIndividual> implements MappingArithmetic
 		while (!shouldBeEnd()) {
 			
 			NAGAIndividual bestIndividual = Collections.max(this);
-			bestIndividual.updateShow();
 			
 			double sumFitness = 0;
 			for (NAGAIndividual id : this) {
@@ -114,6 +113,12 @@ public class NAGA extends ArrayList<NAGAIndividual> implements MappingArithmetic
 
 			if (Collections.max(this).getFitness() - bestFitness > gNIMin) {
 				bestFitness = Collections.max(this).getFitness();
+				Collections.max(this).updateShow();
+				try {
+					Thread.sleep(sleepTime);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				sameFitnessGN = 0;
 			} else
 				sameFitnessGN++;
@@ -150,7 +155,7 @@ public class NAGA extends ArrayList<NAGAIndividual> implements MappingArithmetic
 	}
 
 	public static void faster() {
-		sleepTime = sleepTime < 100 ? 0 : sleepTime - 100;
+		sleepTime = sleepTime < 100 ? 10 : sleepTime - 100;
 	}
 
 	public static void slower() {
