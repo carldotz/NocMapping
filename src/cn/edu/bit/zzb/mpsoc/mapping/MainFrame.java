@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
 	public View view = null;
 	public static StatusBar statusBar = null; 
 	public static ACG aCG = null;
-	public static ICG iCG = null;
+	public static NAG nAG = null;
 	public static ToolBar toolBar = null;
 	public static MenuBar menuBar = null;
 

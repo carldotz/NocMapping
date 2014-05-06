@@ -27,7 +27,7 @@ import com.mxgraph.analysis.mxGraphStructure;
 import com.mxgraph.costfunction.mxDoubleValCostFunction;
 import com.mxgraph.view.mxGraph;
 
-public class ICGConfigDialog extends ConfigDialog {
+public class NAGConfigDialog extends ConfigDialog {
 
 	private static final long serialVersionUID = 314415782483658529L;
 
@@ -40,10 +40,10 @@ public class ICGConfigDialog extends ConfigDialog {
 	private JTextField numRowsField = new JTextField();
 	private JTextField numColumnsField = new JTextField();
 
-	public ICGConfigDialog(final mxGraph _graph) {
+	public NAGConfigDialog(final mxGraph _graph) {
 
 		super(_graph, "ICG Generate");
-		MainFrame.iCG = new ICG(_graph);
+		MainFrame.nAG = new NAG(_graph);
 
 		this.aGraph = new mxAnalysisGraph();
 		this.numRowsField.setText(String.valueOf(numRows));
@@ -88,7 +88,7 @@ public class ICGConfigDialog extends ConfigDialog {
 					graph.selectAll();
 					graph.removeCells();
 	
-					MainFrame.iCG.clear();
+					MainFrame.nAG.clear();
 	
 					mxGraphGenerator generator = new mxGraphGenerator(
 							mxGraphGenerator.getGeneratorFunction(graph, false, 0,
@@ -107,8 +107,8 @@ public class ICGConfigDialog extends ConfigDialog {
 					
 					graph.getModel().endUpdate();
 					
-					MainFrame.iCG.setRC(numColumns, numRows);
-					Thread t = new Thread(MainFrame.iCG);
+					MainFrame.nAG.setRC(numColumns, numRows);
+					Thread t = new Thread(MainFrame.nAG);
 					t.run();
 				}
 				setVisible(false);

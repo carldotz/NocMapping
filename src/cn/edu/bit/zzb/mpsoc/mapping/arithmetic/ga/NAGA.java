@@ -10,12 +10,11 @@ import javax.swing.JOptionPane;
 import cn.edu.bit.zzb.mpsoc.mapping.MainFrame;
 import cn.edu.bit.zzb.mpsoc.mapping.MappingArithmetic;
 
-@SuppressWarnings("serial")
 public class NAGA extends ArrayList<NAGAIndividual> implements MappingArithmetic {
 
+	private static final long serialVersionUID = -5818364744633644873L;
 	public static boolean Running = false;
 	public static int sleepTime = 1000;
-	public int gNMax = 0;
 	public int gNNMin = 0;
 	public float gNIMin = 0;
 
@@ -38,8 +37,7 @@ public class NAGA extends ArrayList<NAGAIndividual> implements MappingArithmetic
 		suspend = false;
 	}
 
-	public NAGA(int indiviadualNumber, int gNMax, int gNNMin, float gNIMin) {
-		this.gNMax = gNMax;
+	public NAGA(int indiviadualNumber, int gNNMin, float gNIMin) {
 		this.gNNMin = gNNMin;
 		this.gNIMin = gNIMin;
 
@@ -70,10 +68,20 @@ public class NAGA extends ArrayList<NAGAIndividual> implements MappingArithmetic
 		sleepTime = 1000;
 		gAEnd = false;
 		suspend = false;
-		MainFrame.iCG.clearACG();// 初始化
+		MainFrame.nAG.clearACG();// 初始化
 		geneticNumber = 0;
 		bestFitness = Collections.max(this).getFitness();
 		while (!shouldBeEnd()) {
+			
+			NAGAIndividual bestIndividual = Collections.max(this);
+			bestIndividual.updateShow();
+			
+			double sumFitness = 0;
+			for (NAGAIndividual id : this) {
+				sumFitness += id.getFitness();
+			}
+			averageFitness = (float) (sumFitness / this.size());
+			
 			// 选择
 			List<NAGAIndividual> hasSelected = new LinkedList<NAGAIndividual>();
 			while (hasSelected.size() < this.size()) {
@@ -96,22 +104,16 @@ public class NAGA extends ArrayList<NAGAIndividual> implements MappingArithmetic
 				this.add(NAGAIndividual.mutation(newGenetic.get(i)));
 			}
 
-			double sumFitness = 0;
-			for (NAGAIndividual id : this) {
-				sumFitness += id.getFitness();
-			}
-			averageFitness = (float) (sumFitness / this.size());
-
 			geneticNumber++;
 			// 最优值变化则刷新
-			if (bestFitness < Collections.max(this).getFitness()) {
+			
+			if(Collections.max(this).getFitness() < bestIndividual.getFitness()) {
+				this.remove(Collections.min(this));
+				this.add(bestIndividual);
+			}
+
+			if (Collections.max(this).getFitness() - bestFitness > gNIMin) {
 				bestFitness = Collections.max(this).getFitness();
-				Collections.max(this).updateShow();
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
 				sameFitnessGN = 0;
 			} else
 				sameFitnessGN++;
@@ -132,8 +134,6 @@ public class NAGA extends ArrayList<NAGAIndividual> implements MappingArithmetic
 		MainFrame.statusBar.setStatue("GA Mapping: G " + geneticNumber
 				+ "   C " + 1 / bestFitness);
 		if (sameFitnessGN > gNNMin)
-			return true;
-		if (geneticNumber > gNMax)
 			return true;
 		if (gAEnd)
 			return true;

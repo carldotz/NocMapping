@@ -26,7 +26,7 @@ public class View extends JPanel {
 	protected static mxGraphComponent graphComponentICG = new mxGraphComponent(
 			new mxGraph());
 
-	ICGConfigDialog iCGConfigDialog = null;
+	NAGConfigDialog nAGConfigDialog = null;
 	ACGConfigDialog aCGConfigDialog = null;
 	NAGAConfigDialog gAConfigDialog = null;
 
@@ -120,10 +120,10 @@ public class View extends JPanel {
 	}
 
 	public void creatICG() {
-		if (iCGConfigDialog == null)
-			iCGConfigDialog = new ICGConfigDialog(graphComponentICG.getGraph());
+		if (nAGConfigDialog == null)
+			nAGConfigDialog = new NAGConfigDialog(graphComponentICG.getGraph());
 
-		this.iCGConfigDialog.launch();
+		this.nAGConfigDialog.launch();
 	}
 
 	public void creatACG() {

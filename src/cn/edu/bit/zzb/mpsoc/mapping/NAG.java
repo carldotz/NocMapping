@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.view.mxGraph;
 
-public class ICG extends ArrayList<ICGNode>  implements Runnable{
+public class NAG extends ArrayList<NAGNode>  implements Runnable{
 
 	private static final long serialVersionUID = 8785659070118589304L;
 	
-	private int numColumns = 0;
-	private int numRows = 0;
+	private int numColumns = 8;
+	private int numRows = 8;
 	
 	mxGraph graph = null;
 
-	public ICG(mxGraph graph) {
+	public NAG(mxGraph graph) {
 		super();
 		this.graph = graph;
 	}
@@ -25,11 +25,11 @@ public class ICG extends ArrayList<ICGNode>  implements Runnable{
 
 	public void creatICG() {
 		MainFrame.statusBar.setStatue("Clearing the old ICG");
-		MainFrame.iCG.clear();
+		MainFrame.nAG.clear();
 		MainFrame.statusBar.setStatue("Creat a new ICG");
 		for (int i = 0; i < numColumns; i++) {
 			for (int j = 0; j < numRows; j++)
-				this.add(new ICGNode(i, j, graph));
+				this.add(new NAGNode(i, j, graph));
 		}
 		bandWithGraph();
 		MainFrame.statusBar.setStatue("Ready");
@@ -58,7 +58,7 @@ public class ICG extends ArrayList<ICGNode>  implements Runnable{
 		graph.refresh();
 	}
 
-	public static int distance(ICGNode a, ICGNode b) {
+	public static int distance(NAGNode a, NAGNode b) {
 		int distance = 0;
 		distance += ((a.x > b.x) ? a.x - b.x : b.x - a.x);
 		distance += ((a.y > b.y) ? a.y - b.y : b.y - a.y);

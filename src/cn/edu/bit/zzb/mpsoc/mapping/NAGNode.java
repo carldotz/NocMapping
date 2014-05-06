@@ -2,14 +2,14 @@ package cn.edu.bit.zzb.mpsoc.mapping;
 
 import com.mxgraph.view.mxGraph;
 
-public class ICGNode {
+public class NAGNode {
 	int x;
 	int y;
 
 	ACGNode acgNode = null;
 	mxGraph graph = null;
 
-	public ICGNode(int i, int j, mxGraph graph) {
+	public NAGNode(int i, int j, mxGraph graph) {
 		this.x = i;
 		this.y = j;
 

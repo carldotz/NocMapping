@@ -98,7 +98,7 @@ public class ToolBar extends JPanel implements ActionListener {
 
 		if ("New ACG".equals(cmd)) {
 			mf.getView().creatACG();
-			if(MainFrame.iCG != null) {
+			if(MainFrame.nAG != null) {
 				this.buttonMap.setEnabled(true);
 			}
 		} else if ("New ICG".equals(cmd)) {
